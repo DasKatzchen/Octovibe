@@ -94,7 +94,7 @@ struct TCodeAxis
 
     void set(unsigned long ts, float value, unsigned long interval_micros)
     {
-        value0 = this->get_raw(0);
+        value0 = this->get_raw(ts); // ramp from the current position, not the previous target
         value1 = value;
         T0 = ts;
         T1 = ts + interval_micros;

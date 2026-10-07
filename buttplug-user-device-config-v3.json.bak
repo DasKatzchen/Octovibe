@@ -34,7 +34,7 @@
 								"actuator": {
 									"step-range": [
 										0,
-										100
+										99
 									],
 									"messages": [
 										"ScalarCmd"
@@ -47,7 +47,7 @@
 								"actuator": {
 									"step-range": [
 										0,
-										100
+										99
 									],
 									"messages": [
 										"ScalarCmd"
@@ -60,7 +60,7 @@
 								"actuator": {
 									"step-range": [
 										0,
-										100
+										99
 									],
 									"messages": [
 										"ScalarCmd"
@@ -73,7 +73,7 @@
 								"actuator": {
 									"step-range": [
 										0,
-										100
+										99
 									],
 									"messages": [
 										"ScalarCmd"
@@ -86,7 +86,7 @@
 								"actuator": {
 									"step-range": [
 										0,
-										100
+										99
 									],
 									"messages": [
 										"ScalarCmd"
@@ -99,7 +99,7 @@
 								"actuator": {
 									"step-range": [
 										0,
-										100
+										99
 									],
 									"messages": [
 										"ScalarCmd"
@@ -112,7 +112,7 @@
 								"actuator": {
 									"step-range": [
 										0,
-										100
+										99
 									],
 									"messages": [
 										"ScalarCmd"
@@ -125,7 +125,7 @@
 								"actuator": {
 									"step-range": [
 										0,
-										100
+										99
 									],
 									"messages": [
 										"ScalarCmd"

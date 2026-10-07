@@ -1,6 +1,8 @@
 #ifndef ICOMMUNICATION_H
 #define ICOMMUNICATION_H
 
+#include <stddef.h>
+
 //Interface for communication
 class ICommunication {
 
@@ -11,7 +13,9 @@ class ICommunication {
 
     virtual void output(char* data) = 0;
 
-    virtual bool readData(char* input) = 0;
+    // Copies the next received message into input (at most size - 1 chars, always
+    // null-terminated). Returns false if there is no pending message.
+    virtual bool readData(char* input, size_t size) = 0;
 };
 
 #endif
