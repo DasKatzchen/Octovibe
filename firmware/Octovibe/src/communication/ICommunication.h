@@ -11,7 +11,7 @@ class ICommunication {
 
     virtual void start() = 0;
 
-    virtual void output(char* data) = 0;
+    virtual void output(const char* data) = 0;
 
     // Copies the next received message into input (at most size - 1 chars, always
     // null-terminated). Returns false if there is no pending message.

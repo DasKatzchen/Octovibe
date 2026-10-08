@@ -11,20 +11,8 @@ class RxCallbacks: public NimBLECharacteristicCallbacks {
 public:
     explicit RxCallbacks(QueueHandle_t queue) : queue(queue) {}
 
-    // NimBLE-Arduino 1.x signature
-    void onWrite(NimBLECharacteristic* pCharacteristic) {
-        enqueue(pCharacteristic);
-    }
-
-    // NimBLE-Arduino 2.x signature
-    void onWrite(NimBLECharacteristic* pCharacteristic, NimBLEConnInfo& connInfo) {
-        enqueue(pCharacteristic);
-    }
-
-private:
-    QueueHandle_t queue;
-
-    void enqueue(NimBLECharacteristic* pCharacteristic) {
+    // Requires NimBLE-Arduino 2.x
+    void onWrite(NimBLECharacteristic* pCharacteristic, NimBLEConnInfo& connInfo) override {
         auto value = pCharacteristic->getValue();
         size_t len = value.length();
         if (len == 0) {
@@ -38,15 +26,18 @@ private:
         msg.data[len] = '\0';
         xQueueSend(queue, &msg, 0); // never block the BLE host task; drop if full
     }
+
+private:
+    QueueHandle_t queue;
 };
 
 class ServerCallbacks: public NimBLEServerCallbacks {
-    void onConnect(NimBLEServer* pServer) {
+    void onConnect(NimBLEServer* pServer, NimBLEConnInfo& connInfo) override {
         #ifdef NEOPIXEL
         neopixelWrite(DEBUG_LED,0,RGB_BRIGHTNESS,0); // Green
         #endif
     };
-    void onDisconnect(NimBLEServer* pServer) {
+    void onDisconnect(NimBLEServer* pServer, NimBLEConnInfo& connInfo, int reason) override {
         #ifdef NEOPIXEL
         neopixelWrite(DEBUG_LED,0,0,RGB_BRIGHTNESS); // Blue
         #endif
@@ -86,7 +77,7 @@ void BLECommunication::start() {
     //m_isOpen = true;
 }
 
-void BLECommunication::output(char* data) {
+void BLECommunication::output(const char* data) {
     if(pServer->getConnectedCount()) {
         NimBLEService* pSvc = pServer->getServiceByUUID(BLE_SERVICE_UUID);
         if(pSvc) {

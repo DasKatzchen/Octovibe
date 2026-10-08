@@ -44,7 +44,7 @@ public:
 
     void start() override;
 	
-    void output(char* data) override;
+    void output(const char* data) override;
 
     bool readData(char* input, size_t size) override;
 };
